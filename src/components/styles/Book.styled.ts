@@ -29,7 +29,7 @@ export const Image = styled.div`
   background: #eee;
   width: 128px;
   height: 193px;
-  background-image: ${({ url }) => `url(${url})`};
+  background-image: ${(props: { image?: string }) => `url(${props.image})`};
 `;
 
 export const SelectContainer = styled.div`
@@ -72,7 +72,7 @@ export const ShelfContainer = styled.div`
 
 export const BookList = styled.div`
   list-style-type: none;
-  padding: ${({ padding }) => padding || 0};
+  padding: ${(props: { padding?: string }) => props.padding || 0};
   margin: 0;
 
   display: flex;

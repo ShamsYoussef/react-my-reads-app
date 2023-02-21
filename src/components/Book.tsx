@@ -3,8 +3,8 @@ import * as APIs from "../BooksAPI";
 import { UPDATE_BOOK } from "../store/action-types";
 import { useStore } from "../store/store";
 import { Card, Author, Title, Image, SelectContainer, Cover} from './styles/Book.styled'
-const Book = ({ bookDetails }: any) => {
 
+const Book = ({ bookDetails }: any) => {
   const dispatch = useStore(false)[1];
 
   const updateBooksHandler = (book: any, shelf: string) => {
@@ -17,7 +17,7 @@ const Book = ({ bookDetails }: any) => {
     <Card>
       <div>
         <Cover>
-          <Image url = {bookDetails?.imageLinks?.thumbnail || ""}></Image>
+          <Image image = {bookDetails?.imageLinks?.thumbnail || ""}></Image>
           <SelectContainer>
             <select
               defaultValue={bookDetails.shelf || 'none'}
