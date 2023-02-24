@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
   padding: 10px 0;
-  background: #2e7c31;
+  background: rgb(153 178 192);
   text-align: center;
 
   h1 {

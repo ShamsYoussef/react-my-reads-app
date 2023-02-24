@@ -5,5 +5,9 @@ export const SHELVES = {
   none: "None"
 };
 
-export const HEADER = "MyReads"
-export const INPUT_PLACEHOLDER = 'Search by title, author, or ISBN'
+export const MOVE_TO_LABEL = "Move to...";
+export const HEADER = "MyReads";
+export const INPUT_PLACEHOLDER = "Search by title, author, or ISBN";
+export const ERRORS = {
+  failed: "Something went wrong, please try again"
+};

@@ -2,29 +2,19 @@ import Shelf from "./Shelf";
 import { SHELVES } from "../utils/constants";
 import { StyledShelves } from "./styles/Book.styled";
 import { useStore } from "../store/store";
+import { BookModel } from "../models/Book";
 
 const Shelves = () => {
-  const { books } = useStore()[0];
-  const shelves = [
-    {
-      title: SHELVES.currentlyReading,
-      books: books.filter((book: any) => book.shelf === "currentlyReading")
-    },
-    {
-      title: SHELVES.wantToRead,
-      books: books.filter((book: any) => book.shelf === "wantToRead")
-    },
-    {
-      title: SHELVES.read,
-      books: books.filter((book: any) => book.shelf === "read")
-    }
-  ];
+  const { currentlyReading, wantToRead, read } = useStore()[0];
+  const shelves = [currentlyReading, wantToRead, read];
+  const shelvesTitle = Object.values(SHELVES)
+
   return (
     <StyledShelves>
-      {shelves.map(
-        (shelf, index) =>
-          !!shelf.books?.length && (
-            <Shelf key={index} title={shelf.title} books={shelf.books} />
+      {shelves?.map(
+        (shelf: BookModel[], index: number) =>
+          !!shelf?.length && (
+            <Shelf key={index} title={shelvesTitle[index]} books={shelf} />
           )
       )}
     </StyledShelves>

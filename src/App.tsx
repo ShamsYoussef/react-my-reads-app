@@ -7,12 +7,8 @@ const router = createBrowserRouter([
   { path: "/search", element: <Search /> }
 ]);
 
-function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
-}
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;

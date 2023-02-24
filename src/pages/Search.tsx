@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
-import * as APIs from "../BooksAPI";
+import * as APIs from "../utils/BooksAPI";
 import Book from "../components/Book";
-import { INPUT_PLACEHOLDER } from "../utils/constants";
 import { useDebounce } from "use-debounce";
 import { useStore } from "../store/store";
-import { ADD_FILTERED_BOOKS, ADD_BOOKS } from "../store/action-types";
-import { BookList, SearchBar } from "../components/styles/Book.styled";
-import { CloseButton } from "../components/styles/Button.styled";
+import {
+  ADD_FILTERED_BOOKS,
+  ADD_BOOKS,
+  SHOW_ERROR
+} from "../store/action-types";
+import { BookList } from "../components/styles/Book.styled";
+import { LOADING } from "./../store/action-types";
+import Spinner from "../components/Spinner";
+import SearchInput from "../components/SearchInput";
+import Error from "../components/Error";
+import { ERRORS } from "../utils/constants";
 
 const Search = () => {
   const [input, setInput] = useState("");
   const [debounceInput] = useDebounce(input, 500);
-  const [{ books, filteredBooks }, dispatch] = useStore();
+  const [{ books, filteredBooks, isLoading, showError }, dispatch] = useStore();
 
   useEffect(() => {
     if (!books.length) APIs.getAll().then(data => dispatch(ADD_BOOKS, data));
@@ -20,9 +27,23 @@ const Search = () => {
   useEffect(() => {
     if (!debounceInput.trim()) return;
 
-    APIs.search(debounceInput, null).then((data: any) => {
+    console.log(debounceInput);
+
+    dispatch(SHOW_ERROR, false);
+    dispatch(LOADING, true);
+
+    const filterBooks = async () => {
+      console.log(isLoading);
+
+      let data = await APIs.search(debounceInput, null);
       data = data.error ? [] : data;
       if (data) dispatch(ADD_FILTERED_BOOKS, data);
+      dispatch(LOADING, false);
+    };
+
+    filterBooks().catch(() => {
+      dispatch(LOADING, false);
+      dispatch(SHOW_ERROR, true);
     });
 
     return () => dispatch(ADD_FILTERED_BOOKS, []);
@@ -30,17 +51,15 @@ const Search = () => {
 
   return (
     <>
-      <SearchBar>
-        <CloseButton to="/" />
-        <div>
-          <input
-            value={input}
-            type="text"
-            placeholder={INPUT_PLACEHOLDER}
-            onChange={e => setInput(e.target.value)}
-          />
-        </div>
-      </SearchBar>
+      {isLoading && <Spinner />}
+
+      <SearchInput
+        isLoading={isLoading}
+        setSearchInput={setInput}
+      ></SearchInput>
+      {!isLoading && showError && (
+        <Error margin="120px" message={ERRORS.failed}></Error>
+      )}
       <BookList padding="80px 10px 20px">
         {filteredBooks.map((book: any, index: number) => (
           <Book bookDetails={book} key={index} />

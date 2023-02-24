@@ -1,11 +1,18 @@
+import { BookModel } from "../models/Book";
 import Book from "./Book";
 import { ShelfContainer, BookList } from "./styles/Book.styled";
-const Shelf = ({ title, books }: any) => {
+
+interface Props {
+  title: string;
+  books: BookModel[];
+}
+
+const Shelf: React.FC<Props> = ({ title, books }) => {
   return (
     <ShelfContainer>
       <h2>{title}</h2>
       <BookList>
-        {books.map((book: any, index: number) => (
+        {books?.map((book: BookModel, index: number) => (
           <Book bookDetails={book} key={index} />
         ))}
       </BookList>

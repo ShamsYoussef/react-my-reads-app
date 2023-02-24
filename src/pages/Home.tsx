@@ -1,36 +1,48 @@
-import { useState, useEffect } from "react";
-import Header from "../components/Header";
-import * as APIs from "../BooksAPI";
-import Shelves from "../components/Shelves";
+import { useEffect } from "react";
+import * as APIs from "../utils/BooksAPI";
 import { useStore } from "../store/store";
-import { ADD_BOOKS } from "../store/action-types";
+import { ADD_BOOKS, LOADING, SHOW_ERROR } from "../store/action-types";
+import { ERRORS } from "../utils/constants";
 import { SearchButton } from "../components/styles/Button.styled";
+import Shelves from "../components/Shelves";
+import Error from "../components/Error";
+import Header from "../components/Header";
+import Spinner from "../components/Spinner";
+import { BookModel } from "../models/Book";
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [{ books }, dispatch] = useStore();
+  const [{ books, isLoading, showError }, dispatch] = useStore();
 
-  const getAllBooks = () => {
-    setLoading(true);
-    APIs.getAll()
-      .then(data => {
-        setLoading(false);
-        dispatch(ADD_BOOKS, data);
-      })
-      .catch(err => console.log(err));
-  };
+  useEffect(() => {
+    const getAllBooks = async () => {
+      dispatch(SHOW_ERROR, false);
+      dispatch(LOADING, true);
+      const allBooks = await APIs.getAll() as BookModel[];  
+      dispatch(LOADING, false);
+      dispatch(ADD_BOOKS, allBooks);
+    };
 
-  useEffect(() => getAllBooks(), []);
+    getAllBooks().catch(() => {
+      dispatch(LOADING, false);
+      dispatch(SHOW_ERROR, true);
+      dispatch(ADD_BOOKS, []);
+
+    });
+  }, []);
 
   return (
     <>
-      {loading && <h1>Loading</h1>}
-      {!loading && books && (
-        <main>
-          <Header />
+      {isLoading && <Spinner />}
+      <Header />
+      {!isLoading && showError && (
+        <Error message={ERRORS.failed}></Error>
+      )}
+
+      {!isLoading && !!books?.length && (
+        <>
           <Shelves />
           <SearchButton to="/search" />
-        </main>
+        </>
       )}
     </>
   );

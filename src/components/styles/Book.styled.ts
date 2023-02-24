@@ -88,7 +88,7 @@ export const BookList = styled.div`
 export const SearchBar = styled.div`
   position: fixed;
   width: 100%;
-  top: 0;
+  top: ${(props: { isLoading: boolean }) => (props.isLoading ? 5 : 0)};
   left: 0;
   z-index: 5;
   display: flex;
