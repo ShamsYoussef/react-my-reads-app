@@ -88,6 +88,7 @@ const configureStore = () => {
   const showError = (currentState: BookStore, showError: boolean) => {
     return { ...currentState, showError };
   };
+  
   /** All book actions */
   const actions: {} = {
     [ADD_BOOKS]: addBooks,
