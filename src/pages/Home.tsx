@@ -28,6 +28,7 @@ const Home = () => {
       dispatch(ADD_BOOKS, []);
 
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

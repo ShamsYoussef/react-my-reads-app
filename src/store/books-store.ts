@@ -22,13 +22,13 @@ const configureStore = () => {
   };
 
   /** Add books to the shelf based on the shelf property */
-  const classifyBook = (state: BookStore, books: BookModel[]) => {
+  const categorizeBooks = (state: BookStore, books: BookModel[]) => {
     const shelves = Object.keys(SHELVES);
     state.currentlyReading = [];
     state.wantToRead = [];
     state.read = [];
 
-    books.filter((book: BookModel) => {
+    books.forEach((book: BookModel) => {
       if (book.shelf === shelves[0]) state.currentlyReading.push(book);
       if (book.shelf === shelves[1]) state.wantToRead.push(book);
       if (book.shelf === shelves[2]) state.read.push(book);
@@ -37,7 +37,7 @@ const configureStore = () => {
 
   /** Add the books to the current State  */
   const addBooks = (currentState: BookStore, books: BookModel[]) => {
-    classifyBook(currentState, books);
+    categorizeBooks(currentState, books);
 
     return { ...currentState, books };
   };
@@ -55,7 +55,7 @@ const configureStore = () => {
       return b;
     });
 
-    classifyBook(currentState, updatedBooks);
+    categorizeBooks(currentState, updatedBooks);
 
     return { ...currentState, books: updatedBooks };
   };

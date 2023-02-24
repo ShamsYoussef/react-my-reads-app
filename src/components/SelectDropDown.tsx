@@ -15,7 +15,7 @@ const SelectDropDown: React.FC<Props> = ({ book, updateBooksHandler }) => {
         defaultValue={book.shelf || "none"}
         onChange={e => updateBooksHandler(book, e.target.value)}
       >
-        <option value="none" disabled>
+        <option value="None" disabled>
           {MOVE_TO_LABEL}
         </option>
         <option value="currentlyReading">{SHELVES.currentlyReading}</option>
