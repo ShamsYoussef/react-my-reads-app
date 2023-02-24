@@ -13,7 +13,7 @@ export const SearchButton = styled(Link)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: rgb(120 166 192);
   background-image: url(${addIcon});
   background-repeat: no-repeat;
   background-position: center;

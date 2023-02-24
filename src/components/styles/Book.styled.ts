@@ -39,7 +39,7 @@ export const SelectContainer = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: rgb(120 166 192);
   background-image: url(${arrowDown});
   background-repeat: no-repeat;
   background-position: center;

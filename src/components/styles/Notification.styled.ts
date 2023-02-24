@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ErrorContainer = styled.div`
+export const NotificationContainer = styled.div`
   width: 50%;
   margin: ${(props: { margin?: string }) => props.margin || `50px`} auto;
 

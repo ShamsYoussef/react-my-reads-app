@@ -5,7 +5,7 @@ import { ADD_BOOKS, LOADING, SHOW_ERROR } from "../store/action-types";
 import { ERRORS } from "../utils/constants";
 import { SearchButton } from "../components/styles/Button.styled";
 import Shelves from "../components/Shelves";
-import Error from "../components/Error";
+import Notification from "../components/Notification";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 import { BookModel } from "../models/Book";
@@ -35,7 +35,7 @@ const Home = () => {
       {isLoading && <Spinner />}
       <Header />
       {!isLoading && showError && (
-        <Error message={ERRORS.failed}></Error>
+        <Notification message={ERRORS.failed} severity= "error"></Notification>
       )}
 
       {!isLoading && !!books?.length && (
