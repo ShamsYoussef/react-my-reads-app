@@ -14,7 +14,9 @@ const Notification: React.FC<NotificationProps> = ({
 }) => {
   return (
     <NotificationContainer margin={margin}>
-      <Alert severity={severity}>{message}</Alert>
+      <Alert data-testid="notification" severity={severity}>
+        {message}
+      </Alert>
     </NotificationContainer>
   );
 };

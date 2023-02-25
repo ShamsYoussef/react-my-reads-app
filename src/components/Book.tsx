@@ -2,7 +2,7 @@ import * as APIs from "../utils/BooksAPI";
 import { UPDATE_BOOK, LOADING, SHOW_ERROR } from "../store/action-types";
 import { useStore } from "../store/store";
 import { Card, Author, Title, Image, Cover } from './styles/Book.styled'
-import { BookModel } from "../models/Book";
+import { BookModel } from "../models/Book.model";
 import SelectDropDown from './SelectDropDown';
 
 interface BookProps {
@@ -16,7 +16,7 @@ const Book: React.FC<BookProps> = ({ bookDetails }) => {
    * Call the Api to update the books
    * then dispatch() to move the updated book to the new shelf
    */
-  const updateBooksHandler = async (book: any, shelf: string) => {
+  const updateBooksHandler = async (book: BookModel, shelf: string) => {
     try {
       dispatch(LOADING, true)
       dispatch(SHOW_ERROR, false)
@@ -24,21 +24,22 @@ const Book: React.FC<BookProps> = ({ bookDetails }) => {
       dispatch(LOADING, false);
       dispatch(UPDATE_BOOK, { book, shelf });
     }
-    catch {      
+    catch {
       dispatch(LOADING, false);
       dispatch(SHOW_ERROR, true)
     }
   };
 
   return (
-    <Card>
+    <Card data-testid="bookCard">
       <div>
         <Cover>
-          <Image image={bookDetails?.imageLinks?.thumbnail || ""}></Image>
-          <SelectDropDown updateBooksHandler= {updateBooksHandler} book= {bookDetails}></SelectDropDown>
+          <Image data-testid="image" image={bookDetails?.imageLinks?.thumbnail || ""}></Image>
+          <SelectDropDown updateBooksHandler={updateBooksHandler} book={bookDetails}></SelectDropDown>
         </Cover>
-        <Title>{bookDetails.title || ""}</Title>
-        <Author>{bookDetails.authors?.join(" & ") || ""}</Author>
+        <Title data-testid="title">{bookDetails?.title || ""}</Title>
+        <Author data-testid="authors">
+          {!!bookDetails?.authors?.length ? bookDetails.authors.join(" & ") : ""}</Author>
       </div>
     </Card>
   );

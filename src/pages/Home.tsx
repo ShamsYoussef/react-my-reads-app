@@ -8,7 +8,7 @@ import Shelves from "../components/Shelves";
 import Notification from "../components/Notification";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
-import { BookModel } from "../models/Book";
+import { BookModel } from "../models/Book.model";
 
 const Home = () => {
   const [{ books, isLoading, showError }, dispatch] = useStore();

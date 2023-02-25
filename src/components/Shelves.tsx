@@ -2,7 +2,7 @@ import Shelf from "./Shelf";
 import { SHELVES } from "../utils/constants";
 import { StyledShelves } from "./styles/Book.styled";
 import { useStore } from "../store/store";
-import { BookModel } from "../models/Book";
+import { BookModel } from "../models/Book.model";
 
 const Shelves = () => {
   const { currentlyReading, wantToRead, read } = useStore()[0];

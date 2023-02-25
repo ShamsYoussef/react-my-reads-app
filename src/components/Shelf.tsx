@@ -1,4 +1,4 @@
-import { BookModel } from "../models/Book";
+import { BookModel } from "../models/Book.model";
 import Book from "./Book";
 import { ShelfContainer, BookList } from "./styles/Book.styled";
 

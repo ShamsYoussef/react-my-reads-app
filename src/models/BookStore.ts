@@ -1,4 +1,4 @@
-import { BookModel } from "./Book";
+import { BookModel } from "./Book.model";
 
 export interface BookStore {
   books: BookModel[];

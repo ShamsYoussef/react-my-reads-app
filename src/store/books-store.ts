@@ -6,7 +6,7 @@ import {
   LOADING,
   SHOW_ERROR
 } from "./action-types";
-import { BookModel } from "../models/Book";
+import { BookModel } from "../models/Book.model";
 import { SHELVES } from "./../utils/constants";
 import { BookStore } from "../models/BookStore";
 
