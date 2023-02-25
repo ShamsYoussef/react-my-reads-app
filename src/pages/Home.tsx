@@ -17,7 +17,7 @@ const Home = () => {
     const getAllBooks = async () => {
       dispatch(SHOW_ERROR, false);
       dispatch(LOADING, true);
-      const allBooks = await APIs.getAll() as BookModel[];  
+      const allBooks = await APIs.getAll() as BookModel[];
       dispatch(LOADING, false);
       dispatch(ADD_BOOKS, allBooks);
     };
@@ -35,13 +35,13 @@ const Home = () => {
       {isLoading && <Spinner />}
       <Header />
       {!isLoading && showError && (
-        <Notification message={ERRORS.failed} severity= "error"></Notification>
+        <Notification message={ERRORS.failed} severity="error"></Notification>
       )}
 
       {!isLoading && !!books?.length && (
         <>
           <Shelves />
-          <SearchButton to="/search" />
+          <SearchButton data-testid='search' to="/search" />
         </>
       )}
     </>

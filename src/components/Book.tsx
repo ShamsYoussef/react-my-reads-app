@@ -6,10 +6,11 @@ import { BookModel } from "../models/Book.model";
 import SelectDropDown from './SelectDropDown';
 
 interface BookProps {
-  bookDetails: BookModel
+  bookDetails: BookModel,
+  dataTestId?: string
 }
 
-const Book: React.FC<BookProps> = ({ bookDetails }) => {
+const Book: React.FC<BookProps> = ({ bookDetails, dataTestId }) => {
   const dispatch = useStore()[1];
 
   /**
@@ -31,7 +32,7 @@ const Book: React.FC<BookProps> = ({ bookDetails }) => {
   };
 
   return (
-    <Card data-testid="bookCard">
+    <Card data-testid={dataTestId || "bookCard"}>
       <div>
         <Cover>
           <Image data-testid="image" image={bookDetails?.imageLinks?.thumbnail || ""}></Image>

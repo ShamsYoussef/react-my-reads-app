@@ -10,7 +10,7 @@ const Shelves = () => {
   const shelvesTitle = Object.values(SHELVES)
 
   return (
-    <StyledShelves>
+    <StyledShelves data-testid='shelves'>
       {shelves?.map(
         (shelf: BookModel[], index: number) =>
           !!shelf?.length && (

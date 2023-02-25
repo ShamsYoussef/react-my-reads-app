@@ -26,9 +26,9 @@ const Search = () => {
    * shelf property to each book that is assigned to a shelf on the home page.
    */
   useEffect(() => {    
-    if (!books.length) APIs.getAll().then(data => dispatch(ADD_BOOKS, data));
+    if (!books?.length) APIs.getAll().then(data => dispatch(ADD_BOOKS, data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!books.length]);
+  }, [!books?.length]);
 
   useEffect(() => {
     if (!debounceInput.trim()) return;
