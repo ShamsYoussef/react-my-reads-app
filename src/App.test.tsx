@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import routesConfig from "./RouteConfig";
+import { INPUT_PLACEHOLDER } from "./utils/constants";
 
 describe("App", () => {
   const setupRouter = (route?: string[]) => {
@@ -17,5 +18,14 @@ describe("App", () => {
     const header = screen.getByText("MyReads");
 
     expect(header).toBeInTheDocument();
+  });
+
+  it("Should verify search page content after navigation", async () => {
+    setupRouter(["/", "/search"]);
+
+    await waitFor(() => {
+      const searchInput = screen.queryByPlaceholderText(INPUT_PLACEHOLDER);
+      expect(searchInput).toBeInTheDocument();
+    });
   });
 });
