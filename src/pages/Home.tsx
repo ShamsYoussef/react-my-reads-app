@@ -40,7 +40,7 @@ const Home = () => {
 
       {!isLoading && !!books?.length && (
         <>
-          <Shelves />
+          <Shelves data-testid = 'shelves' />
           <SearchButton data-testid='search' to="/search" />
         </>
       )}

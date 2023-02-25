@@ -11,10 +11,10 @@ describe("App", () => {
     render(<RouterProvider router={router} />);
   };
 
-  it("Should verify page content for default route (Home)", async () => {
-    await setupRouter();
+  it("Should verify page content for default route (Home)", () => {
+    setupRouter();
 
-    const header = await screen.getByText("MyReads");
+    const header = screen.getByText("MyReads");
 
     expect(header).toBeInTheDocument();
   });

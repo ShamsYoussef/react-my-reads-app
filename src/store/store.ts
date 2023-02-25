@@ -7,10 +7,13 @@ export const useStore = (shouldListen = true) => {
   const setState = useState(globalState)[1];
 
   const dispatch = (actionType: string, payload: any) => {
-    const newState = actions[actionType](globalState, payload);
-    globalState = { ...globalState, ...newState };
+    if (actions[actionType]) {
+      const newState = actions[actionType](globalState, payload);
 
-    listeners.forEach(listener => listener(globalState));
+      globalState = { ...globalState, ...newState };
+
+      listeners.forEach(listener => listener(globalState));
+    }
   };
 
   useEffect(() => {

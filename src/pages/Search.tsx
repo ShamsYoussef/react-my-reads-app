@@ -25,7 +25,7 @@ const Search = () => {
    * Call "getAll()" if the books are lost due to "Refresh" => to add
    * shelf property to each book that is assigned to a shelf on the home page.
    */
-  useEffect(() => {    
+  useEffect(() => {
     if (!books?.length) APIs.getAll().then(data => dispatch(ADD_BOOKS, data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!books?.length]);
@@ -79,11 +79,13 @@ const Search = () => {
         ></Notification>
       )}
 
-      <BookList padding="80px 10px 20px">
-        {filteredBooks?.map((book: any, index: number) => (
-          <Book bookDetails={book} key={index} />
-        ))}
-      </BookList>
+      {!isLoading && !!filteredBooks?.length &&
+        <BookList  data-testid='bookList'  padding="80px 10px 20px">
+          {filteredBooks.map((book: any, index: number) => (
+            <Book bookDetails={book} key={index} />
+          ))}
+        </BookList>
+      }
     </>
   );
 };
