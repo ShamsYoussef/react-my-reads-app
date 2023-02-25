@@ -64,5 +64,4 @@ describe("Book component", () => {
 
     expect(authorEl).toBeEmptyDOMElement();
   });
-
 });

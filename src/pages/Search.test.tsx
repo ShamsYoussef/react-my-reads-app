@@ -53,7 +53,7 @@ describe("Search", () => {
     expect(searchInputEl).toBeInTheDocument();
   });
 
-  it("Should display Book list if books were returned", async () => {
+  it("The list of returned books should be displayed", async () => {
     setupSearch();
 
     const searchInputEl = screen.getByPlaceholderText(INPUT_PLACEHOLDER);
@@ -67,7 +67,7 @@ describe("Search", () => {
     });
   });
 
-  it("Should display error message if the service fails", async () => {
+  it("An error message should be displayed if the service fails", async () => {
     setupSearch();
 
     mockedFetch.mockImplementation(() => Promise.reject(new Error("error")));
@@ -85,7 +85,7 @@ describe("Search", () => {
     });
   });
 
-  it("Should display NotFound notification if there are no books wa returned", async () => {
+  it("A 'Not Found' message should be displayed if no books are returned", async () => {
     setupSearch();
 
     mockedFetch.mockImplementation(() =>

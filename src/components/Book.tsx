@@ -7,11 +7,10 @@ import SelectDropDown from './SelectDropDown';
 
 interface BookProps {
   bookDetails: BookModel,
-  dataTestId?: string
 }
 
-const Book: React.FC<BookProps> = ({ bookDetails, dataTestId }) => {
-  const dispatch = useStore()[1];
+const Book: React.FC<BookProps> = ({ bookDetails }) => {
+  const dispatch = useStore(false)[1];
 
   /**
    * Call the Api to update the books
@@ -32,7 +31,7 @@ const Book: React.FC<BookProps> = ({ bookDetails, dataTestId }) => {
   };
 
   return (
-    <Card data-testid={dataTestId || "bookCard"}>
+    <Card data-testid="bookCard">
       <div>
         <Cover>
           <Image data-testid="image" image={bookDetails?.imageLinks?.thumbnail || ""}></Image>

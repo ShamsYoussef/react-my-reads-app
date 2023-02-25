@@ -15,6 +15,7 @@ import {
   SHOW_ERROR,
   LOADING
 } from "../store/action-types";
+import { BookModel } from "../models/Book.model";
 
 const Search = () => {
   const [input, setInput] = useState("");
@@ -31,11 +32,10 @@ const Search = () => {
   }, [!books?.length]);
 
   useEffect(() => {
-    if (!debounceInput.trim()) return;
+    if (!debounceInput) return;
 
     dispatch(SHOW_ERROR, false);
     dispatch(LOADING, true);
-
     const filterBooks = async () => {
       let data = await APIs.search(debounceInput, null);
       data = data.error ? [] : data;
@@ -62,8 +62,8 @@ const Search = () => {
         isLoading={isLoading}
         setSearchInput={setInput}
       ></SearchInput>
-
-      {!isLoading && showError && (
+      
+       {!isLoading && debounceInput && showError && (
         <Notification
           margin="120px"
           message={ERRORS.failed}
@@ -71,7 +71,7 @@ const Search = () => {
         ></Notification>
       )}
 
-      {!isLoading && debounceInput.trim() && !filteredBooks?.length && (
+      {!isLoading && debounceInput && !showError && !filteredBooks?.length && (
         <Notification
           margin="120px"
           message={ERRORS.notFound}
@@ -81,7 +81,7 @@ const Search = () => {
 
       {!isLoading && !!filteredBooks?.length &&
         <BookList data-testid='bookList' padding="80px 10px 20px">
-          {filteredBooks.map((book: any, index: number) => (
+          {filteredBooks.map((book: BookModel, index: number) => (
             <Book bookDetails={book} key={index} />
           ))}
         </BookList>

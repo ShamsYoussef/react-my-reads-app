@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import routesConfig from "./RouteConfig";
-import { ERRORS, INPUT_PLACEHOLDER } from "./utils/constants";
+import { HEADER, INPUT_PLACEHOLDER } from "./utils/constants";
 
 describe("App", () => {
   const setupRouter = (route?: string[]) => {
@@ -15,7 +15,7 @@ describe("App", () => {
   it("Should verify page content for default route (Home)", () => {
     setupRouter();
 
-    const header = screen.getByText("MyReads");
+    const header = screen.getByText(HEADER);
 
     expect(header).toBeInTheDocument();
   });

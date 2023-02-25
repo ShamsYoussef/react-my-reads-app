@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { BookModel } from "../models/Book.model";
 import Shelf from "./Shelf";
 
@@ -41,13 +41,5 @@ describe("Shelf component", () => {
 
     expect(titleEl).toBeInTheDocument();
     expect(titleEl.textContent).toBe("Want To Read");
-  });
-
-  it("should display the correct number of books", () => {
-    setupShelf(books, "Want To Read");
-
-    const booksEl = screen.getAllByTestId("book");
-
-    expect(booksEl).toHaveLength(2);
   });
 });

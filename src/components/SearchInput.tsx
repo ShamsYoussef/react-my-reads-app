@@ -16,7 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
   const updateInput = (input: any) => {
     setInput(input);
-    setSearchInput(input);
+    setSearchInput(input.trim());
   };
   return (
     <SearchBar isLoading={isLoading}>
