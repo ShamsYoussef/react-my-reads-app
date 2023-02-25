@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import routesConfig from "./RouteConfig";
-import { INPUT_PLACEHOLDER } from "./utils/constants";
+import { ERRORS, INPUT_PLACEHOLDER } from "./utils/constants";
 
 describe("App", () => {
   const setupRouter = (route?: string[]) => {

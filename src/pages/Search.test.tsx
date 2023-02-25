@@ -29,18 +29,6 @@ describe("Search", () => {
     }
   ];
 
-  const filteredBooks: BookModel[] = [
-    {
-      id: "G1523",
-      authors: ["Eslam", "Mohamed"],
-      title: "Geology",
-      shelf: "read",
-      imageLinks: {
-        thumbnail: "book5.svg"
-      }
-    }
-  ];
-
   const setupSearch = () => {
     mockedFetch.mockResolvedValue({
       json: () => Promise.resolve(allBooks)
@@ -68,15 +56,13 @@ describe("Search", () => {
   it("Should display Book list if books were returned", async () => {
     setupSearch();
 
-    mockedFetch.mockImplementation(() => Promise.resolve(filteredBooks));
-
     const searchInputEl = screen.getByPlaceholderText(INPUT_PLACEHOLDER);
 
     fireEvent.change(searchInputEl, { target: { value: "pro" } });
 
     await waitFor(() => {
+      expect(mockedFetch).toHaveBeenCalledTimes(2);
       const bookList = screen.queryByTestId("bookList");
-      expect(mockedFetch).toHaveBeenCalledTimes(1);
       expect(bookList).toBeDefined();
     });
   });

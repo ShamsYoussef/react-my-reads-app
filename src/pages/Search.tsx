@@ -80,7 +80,7 @@ const Search = () => {
       )}
 
       {!isLoading && !!filteredBooks?.length &&
-        <BookList  data-testid='bookList'  padding="80px 10px 20px">
+        <BookList data-testid='bookList' padding="80px 10px 20px">
           {filteredBooks.map((book: any, index: number) => (
             <Book bookDetails={book} key={index} />
           ))}

@@ -10,5 +10,6 @@ export const HEADER = "MyReads";
 export const INPUT_PLACEHOLDER = "Search by title, author, or ISBN";
 export const ERRORS = {
   failed: "Something went wrong, please try again",
-  notFound: "No books found"
+  notFound: "No books found",
+  pageNotFound: "Page Not Found"
 };
